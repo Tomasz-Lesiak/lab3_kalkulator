@@ -1,37 +1,31 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+export default function App() {
+  const [visible, setVisible] = useState(false);
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
+  const toggle = () => {
+    setVisible(!visible);
+  };
 
   return (
     <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
+
+      <Text style={styles.title}>Zadanie 2</Text>
+
+      <TouchableOpacity style={styles.button} onPress={toggle}>
+        <Text style={styles.buttonText}>
+          {visible ? 'Ukryj' : 'Pokaż'}
+        </Text>
+      </TouchableOpacity>
+
+      {visible && (
+        <View style={styles.box}>
+          <Text style={styles.text}>Nazywam się</Text>
+          <Text style={styles.name}>Tomasz Lesiak</Text>
+        </View>
+      )}
+
     </View>
   );
 }
@@ -39,7 +33,29 @@ function AppContent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
+  title: {
+    fontSize: 18,
+    marginBottom: 20
+  },
+  button: {
+    backgroundColor: '#ccc',
+    padding: 10,
+    marginBottom: 20
+  },
+  buttonText: {
+    fontSize: 14
+  },
+  box: {
+    alignItems: 'center'
+  },
+  text: {
+    fontSize: 14
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
 });
-
-export default App;
